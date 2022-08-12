@@ -8,7 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-
+import { useState } from "react";
 
 const style = {
     backgroundColor: "#F8F8F8",
@@ -23,7 +23,19 @@ const style = {
 };
 
 
+
+
 export default function MainPage() {
+
+    const [recommendations, setRecommendations] = useState([["Chick-Fil-A", "http://www.chick-fil-a.com/-/media/images/cfacom/default-images/chick-fil-a-logo-vector.ashx"], ["Starbucks", "https://cdn.myportfolio.com/39d3cd982d61c808e7a53d0503ef44a8/7d8794ea-fa06-4963-9320-5a1110e04b17_rw_1920.jpg?h=529c8411937e289c15c94ce08ddb58e3"], ["Burger King", "https://wallpapers.com/images/high/burger-king-logo-uc6b45x83r51xu9v.jpg"], ["McDonald's", "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/9b52ed47965095.588a2e76cb4f6.jpg"]]);
+
+    const [advertisment, setAdvertisment] = useState(false);
+
+    const handlesetRecommendationsChange = (e) => {
+        setRecommendations([["", ""], ["", ""], ["", ""], ["", ""]]);
+        setAdvertisment(true);
+      };
+
   return (
     <div style={{backgroundImage: `url("https://cdn.pixabay.com/photo/2021/02/12/20/02/abstract-6009478_960_720.jpg")`, backgroundRepeat: "no-repeat", height: '93vh', backgroundSize: "cover"}}>
     <Box 
@@ -43,7 +55,7 @@ export default function MainPage() {
         </Grid>
 
         <Grid item xs={6} alignItems="center">
-            <Button variant="contained" color="info" size="small">
+            <Button variant="contained" color="info" size="small" onClick={handlesetRecommendationsChange}>
                 Refresh
             </Button>
         </Grid>
@@ -91,12 +103,12 @@ export default function MainPage() {
                     <CardMedia
                     component="img"
                     height="140"
-                    image="http://www.chick-fil-a.com/-/media/images/cfacom/default-images/chick-fil-a-logo-vector.ashx"
-                    alt="Chick-fil-a"
+                    image={recommendations[0][1]}
+                    alt={recommendations[0][1]}
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        Chick-Fil-A
+                        {recommendations[0][0]}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     </Typography>
@@ -111,12 +123,12 @@ export default function MainPage() {
                     <CardMedia
                     component="img"
                     height="140"
-                    image="https://cdn.myportfolio.com/39d3cd982d61c808e7a53d0503ef44a8/7d8794ea-fa06-4963-9320-5a1110e04b17_rw_1920.jpg?h=529c8411937e289c15c94ce08ddb58e3"
-                    alt="Starbucks"
+                    image={recommendations[1][1]}
+                    alt={recommendations[1][1]}
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        Starbucks 
+                    {recommendations[1][0]} 
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     </Typography>
@@ -131,12 +143,12 @@ export default function MainPage() {
                     <CardMedia
                     component="img"
                     height="140"
-                    image="https://wallpapers.com/images/high/burger-king-logo-uc6b45x83r51xu9v.jpg"
-                    alt="Burger King"
+                    image={recommendations[2][1]}
+                    alt={recommendations[2][1]}
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        Burger King
+                        {recommendations[2][0]}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     </Typography>
@@ -152,12 +164,12 @@ export default function MainPage() {
                     <CardMedia
                     component="img"
                     height="140"
-                    image="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/9b52ed47965095.588a2e76cb4f6.jpg"
-                    alt="McDonald's"
+                    image={recommendations[3][1]}
+                    alt={recommendations[3][1]}
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        McDonald's
+                        {recommendations[3][0]}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     </Typography>
@@ -190,9 +202,10 @@ export default function MainPage() {
 
             </ Grid>
 
+
             <Grid item xs={4}>
 
-                <Card sx={{ maxWidth: 320 }}>
+                {advertisment? <Card sx={{ maxWidth: 320 }}>
                     <CardActionArea>
                         <CardMedia
                         component="img"
@@ -208,7 +221,7 @@ export default function MainPage() {
                         </Typography>
                         </CardContent>
                     </CardActionArea>
-                </Card>
+                </Card>: <></>}
             </Grid>
         
         </Grid>
