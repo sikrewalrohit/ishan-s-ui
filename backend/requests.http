@@ -1,0 +1,4 @@
+###
+// get customer info
+Get http://localhost:4000/api/fetch/fetchData HTTP/1.1
+content-type: application/json
